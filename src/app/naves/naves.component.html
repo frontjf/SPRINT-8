@@ -1,0 +1,53 @@
+
+
+<div class="container container-fluid mt-3">
+    <div class="row d-flex justify-content-evenly">
+  
+      <div class="col-4 col-md-6" *ngFor="let nave of navesPagina1">
+        <div class="card p-3 m-2 text-center" style="width: 22rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ nave.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ nave.model }}</h6>
+            <a href="#" class="card-link" (click)="mostrarFichaNave(nave)">Info Nave</a>
+
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-4 col-md-6" *ngFor="let nave of navesPagina2">
+        <div class="card p-3 m-2 text-center" style="width: 22rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ nave.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ nave.model }}</h6>
+            <a href="#" class="card-link" (click)="mostrarFichaNave(nave)">Info Nave</a>
+
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-4 col-md-6" *ngFor="let nave of navesPagina3">
+        <div class="card p-3 m-2 text-center" style="width: 22rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ nave.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ nave.model }}</h6>
+            <a href="#" class="card-link" (click)="mostrarFichaNave(nave)">Info Nave</a>
+
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-4 col-md-6" *ngFor="let nave of navesPagina4">
+        <div class="card p-3 m-2 text-center" style="width: 22rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ nave.name }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ nave.model }}</h6>
+            <a href="#" class="card-link" (click)="mostrarFichaNave(nave)">Info Nave</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+    
+  

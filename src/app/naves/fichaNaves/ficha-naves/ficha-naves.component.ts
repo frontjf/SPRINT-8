@@ -1,35 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { InfoNavesService } from '../../info-naves.service';
+import { Component, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-fichaNaves',
   templateUrl: './ficha-naves.component.html'
 })
-export class FichaNavesComponent implements OnInit {
-  naveSeleccionada: any; // Ajusta el tipo de datos según la estructura de respuesta de la API
+export class FichaNavesComponent {
+  @Input() nave: any;
 
-  constructor(
-    private route: ActivatedRoute,
-    private infoNavesService: InfoNavesService
-  ) {}
+  getNaveImageUrl(): string {
+    const id = this.extractIdFromUrl(this.nave.url);
+    const imageUrl = `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`;
 
-  ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id !== null) {
-      this.mostrarInfoNave(id);
-    }
+    // Crear un nuevo objeto Image para verificar la carga de la imagen
+    const img = new Image();
+    img.src = imageUrl;
+
+    // Si la carga de la imagen falla, se actualiza la propiedad image del objeto nave
+    img.onerror = () => {
+      this.nave.image = 'assets/error-nave.jpg';
+    };
+
+    return imageUrl;
   }
 
-  mostrarInfoNave(id: string) {
-    this.infoNavesService.getNavePorId(id).subscribe(
-      (nave: any) => {
-        this.naveSeleccionada = nave;
-      },
-      (error: any) => {
-        console.log('Error al obtener la información de la nave:', error);
-      }
-    );
+  private extractIdFromUrl(url: string): string {
+    const matches = url.match(/\/(\d+)\/$/);
+    return matches ? matches[1] : '';
   }
 }
 
@@ -37,29 +34,53 @@ export class FichaNavesComponent implements OnInit {
 
 
 
-// // En el componente fichaNaves
-// import { Component } from '@angular/core';
-// import { InfoNavesService } from '../../info-naves.service';
 
-// @Component({
-//   selector: 'app-fichaNaves',
-//   templateUrl: './ficha-naves.component.html'
-// })
-// export class FichaNavesComponent {
-//   naveSeleccionada: any; // Aquí puedes ajustar el tipo de datos según la estructura de la respuesta de la API
 
-//   constructor(private infoNavesService: InfoNavesService) { }
 
-//   mostrarInfoNave(id: string) {
-//     this.infoNavesService.getNavePorId(id).subscribe(
-//       (nave: any) => {
-//         this.naveSeleccionada = nave;
-//         // Aquí puedes activar la ventana emergente o modal para mostrar los detalles de la nave
-//       },
-//       (error: any) => {
-//         console.log('Error al obtener la información de la nave:', error);
-//       }
-//     );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //   getNaveImageUrl(): string {
+//     const id = this.extractIdFromUrl(this.nave.url);
+//     const imageUrl = `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`;
+
+
+//     // Verificar si la imagen se carga correctamente
+//     const img = new Image();
+//     img.src = imageUrl;
+
+//     if (img.complete) {
+//       // La imagen se cargó correctamente
+//       return imageUrl;
+//     } else {
+//       // La imagen no se cargó correctamente, devolver la URL de la imagen de error
+//       return 'assets/error-nave.JPG';
+//     }
 //   }
+
+
+//   private extractIdFromUrl(url: string): string {
+//     const matches = url.match(/\/(\d+)\/$/);
+//     return matches ? matches[1] : '';
+//   }
+
 // }
+
+
+
+
+
+
 

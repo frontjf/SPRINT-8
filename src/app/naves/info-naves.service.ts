@@ -5,21 +5,19 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class InfoNavesService {
-  private baseUrl = 'https://swapi.dev/api';
+export class ApiNavesService {
+  private apiUrl = 'https://swapi.dev/api/starships';
 
   constructor(private http: HttpClient) { }
 
-  getNaves(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/starships`);
+  getNaves(page?: number): Observable<any> {
+    let url = 'https://swapi.dev/api/starships/';
+
+    if (page) {
+      url += `?page=${page}`;
+    }
+
+    return this.http.get(url);
   }
 
-  getNavesPorPagina(page: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/starships?page=${page}`);
-  }
-
-  getNavePorId(id: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/starships/${id}`);
-  }
-  
 }
